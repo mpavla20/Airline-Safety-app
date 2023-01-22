@@ -1,0 +1,15 @@
+# The server ----
+server <- function(input, output,session) {
+#The scatter plot ----
+  output$plot1 <- renderPlot({
+    ggplot(data = airline_safety, aes( x = !!input$variable_x, y = airline)) + labs(title = "Plot over the airlines and the choosen x-axis variable. The x and y-axis is swapped here to make the airlines name way more readable. \n Make a box with the + tool to get a table of the chosen airlines in the table right under the plot. You can change the x-value in the select box at the the top")+ geom_point(color = "blue")
+  })
+# The table made from brushing link----
+  output$table <- renderTable({
+    brushedPoints(airline_safety, input$plot1_brush)
+  }) 
+}
+
+
+
+  
